@@ -110,24 +110,13 @@ async function run() {
       res.send(result);
     });
 
-    // car filter
-    //  app.get('/products/:name',async(req, res) =>{
-    //   const brandNameCar = req.params.name;
-    //   const cursor = productsCollection.find();
-    //   const result = await cursor.toArray();
-    //   const allbrandNameCar = result.filter(brandCar => brandCar.brand).filter(brandCar => brandCar.brand.toLowerCase().trim() === brandNameCar.toLowerCase().trim())
-    //   res.json(allbrandNameCar)
-    // });
 
     // loade new
     app.get("/product-details/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const product = await productsCollection.findOne(query);
-      // const cursor = await productsCollection.find();
-      // const result = await cursor.toArray()
-      // // const product = result.filter(prod => prod._id === id)
-      // console.log('========', result)
+     
       console.log(product);
       res.json(product);
     });
@@ -136,7 +125,6 @@ async function run() {
     app.get("/products/:name", async (req, res) => {
       const brandNameCar = req.params.name;
       console.log(brandNameCar);
-      // res.send('success')
       const cursor = productsCollection.find();
       const result = await cursor.toArray();
       const allBrandNameCar = result
@@ -183,13 +171,7 @@ async function run() {
       );
       res.send(result);
     });
-    // delet
-    //  app.delete('/products/:id',async (req,res) =>{
-    //   const id = req.params.id;
-    //   const query = {_id: new ObjectId(id)}
-    //   const result = await productsCollection.deleteOne(query)
-    //   res.send(result);
-    // })
+  
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
@@ -197,8 +179,7 @@ async function run() {
       "Pinged your deployment. You successfully connected to MongoDB!"
     );
   } finally {
-    // Ensures that the client will close when you finish/error
-    // await client.close();
+  
   }
 }
 run().catch(console.dir);
